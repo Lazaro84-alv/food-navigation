@@ -1,28 +1,35 @@
-import { 
-  View, 
-  Pressable, 
-  Text, 
-  Image, 
-  StyleSheet, 
-  Platform 
+import {
+  View,
+  Pressable,
+  Text,
+  Image,
+  StyleSheet,
+  Platform,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 
-import MealDetail from './MealDetails';
+import MealDetails from '../MealDetails';
 
-function MealItem({ id, title, imageUrl, duration, complexity, affordability }) {
+function MealItem({
+  id,
+  title,
+  imageUrl,
+  duration,
+  complexity,
+  affordability,
+}) {
   const navigation = useNavigation();
 
   function selectMealItemHandler() {
     navigation.navigate('MealDetail', {
-      mealId: id
+      mealId: id,
     });
   }
 
   return (
     <View style={styles.mealItem}>
-      <Pressable 
-        android_ripple={{ color: '#ccc' }} 
+      <Pressable
+        android_ripple={{ color: '#ccc' }}
         style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
         onPress={selectMealItemHandler}
       >
@@ -31,10 +38,10 @@ function MealItem({ id, title, imageUrl, duration, complexity, affordability }) 
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
           </View>
-          <MealDetail 
-            duration={duration} 
+          <MealDetails
+            duration={duration}
             affordability={affordability}
-            complexity={complexity} 
+            complexity={complexity}
           />
         </View>
       </Pressable>
@@ -52,25 +59,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 4,
     shadowColor: 'black',
-    shadowOpacity: 0.35,
+    shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 16,
+    shadowRadius: 8,
   },
   buttonPressed: {
-    opacity: 0.5
+    opacity: 0.5,
   },
   innerContainer: {
     borderRadius: 8,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
-    height: 200
+    height: 200,
   },
   title: {
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 18,
-    margin: 8
-  }
+    margin: 8,
+  },
 });
